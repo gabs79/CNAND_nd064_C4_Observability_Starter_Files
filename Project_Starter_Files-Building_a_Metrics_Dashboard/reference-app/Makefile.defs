@@ -1,0 +1,29 @@
+
+TAG := v1.0.3
+
+.PHONY: usage
+usage:
+	echo 'Usage: [build] [push] [run run-arg=<>]'
+
+.PHONY: build2
+build2:
+	echo 'to build2222 tag:${TAG}'
+
+.PHONY: build
+build:
+	docker build -t ${IMAGE_NAME}:${TAG} .
+
+.PHONY: push
+push: build
+	docker push ${IMAGE_NAME}:${TAG}
+
+.PHONY: delete
+delete:
+	kubectl delete -f ${DEPLOYMENT}
+
+.PHONY: redeploy
+redeploy: delete deploy
+
+.PHONY: deploy
+deploy: push
+	kubectl apply -f ${DEPLOYMENT}

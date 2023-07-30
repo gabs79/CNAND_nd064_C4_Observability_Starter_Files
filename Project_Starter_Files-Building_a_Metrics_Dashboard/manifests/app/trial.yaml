@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: trial-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: trial
@@ -16,6 +16,8 @@ spec:
       - name: trial
         # We advise you to build, push and use your own image, instead of using instructor's image.
         image: ghcr.io/jasonsmithio/trial:v1
+        #image: gabs79/udacity-observability-trial:v1.0.2
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
 ---
